@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 namespace Game.Orbits
 {
-    public class OrbitsSystem
+    using GameLoop;
+
+    public class OrbitsSystem : ITickable
     {
         private Vector2 _center;
         private SortedList<int, OrbitWalker> _walkers;
@@ -19,7 +21,7 @@ namespace Game.Orbits
             _walkers.Add(orbitWalker.Id, orbitWalker);
         }
 
-        public void UpdatePositions(float deltaTime)
+        public void Tick(float deltaTime)
         {
             foreach (var walker in _walkers.Values)
                 UpdatePosition(walker, deltaTime);

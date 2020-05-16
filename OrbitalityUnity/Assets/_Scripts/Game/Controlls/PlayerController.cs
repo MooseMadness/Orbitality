@@ -2,19 +2,22 @@
 
 namespace Game.Controlls
 {
+    using Contexts;
+    using Fire;
+
     public class PlayerController
     {
-        private PlanetContext _planetContext;
+        private Cannon _cannon;
 
         public PlayerController(PlanetContext planet, Button fireBtn)
         {
-            _planetContext = planet;
+            _cannon = planet.CannonProvider.GetCannon();
             fireBtn.onClick.AddListener(Fire);
         }
 
         private void Fire()
         {
-            _planetContext.Cannon.TryFire();
+            _cannon.TryFire();
         }
     }
 }

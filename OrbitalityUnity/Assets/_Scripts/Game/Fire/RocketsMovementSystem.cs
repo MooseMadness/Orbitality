@@ -5,8 +5,9 @@ namespace Game.Fire
 {
     using Gravity;
     using Utils;
+    using GameLoop;
 
-    public class RocketsMovementSystem
+    public class RocketsMovementSystem : ITickable
     {
         private GravitySystem _gravitySystem;
         private List<Rocket> _rockets;
@@ -22,7 +23,7 @@ namespace Game.Fire
             _rockets.Add(rocket);
         }
 
-        public void UpdatePositions(float deltaTime)
+        public void Tick(float deltaTime)
         {
             foreach (var rocket in _rockets)
             {

@@ -40,6 +40,9 @@ namespace Game.Gravity
         private Vector3 GetGravityForce(Rigidbody gravityProducer, Rigidbody rigidBody)
         {
             var forceV = gravityProducer.position - rigidBody.position;
+            if (Mathf.Approximately(forceV.magnitude, 0))
+                return Vector3.zero;
+
             var forceDir = forceV.normalized;
             var forceMagnitude = gravityProducer.mass * rigidBody.mass / forceV.sqrMagnitude;
             return forceDir * forceMagnitude * _gravitySettings.GravitationalConstant;

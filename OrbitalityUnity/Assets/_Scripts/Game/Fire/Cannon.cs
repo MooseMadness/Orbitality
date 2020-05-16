@@ -2,7 +2,9 @@
 
 namespace Game.Fire
 {
-    public class Cannon
+    using GameLoop;
+
+    public class Cannon : ITickable
     {
         private Transform _transform;
         private float _reloadingTime;

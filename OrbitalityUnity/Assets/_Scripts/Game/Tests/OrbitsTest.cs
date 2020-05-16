@@ -16,12 +16,12 @@ namespace Game.Tests
             _orbitsSystem = new OrbitsSystem(_sun.transform.localPosition);
             foreach (var planet in _planets)
                 _orbitsSystem.Add(planet.GetOrbitWalker());
-            _orbitsSystem.UpdatePositions(0);
+            _orbitsSystem.Tick(0);
         }
 
         private void Update()
         {
-            _orbitsSystem.UpdatePositions(Time.deltaTime);
+            _orbitsSystem.Tick(Time.deltaTime);
         }
     }
 }
