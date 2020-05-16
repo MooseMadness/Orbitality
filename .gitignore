@@ -1,7 +1,7 @@
-/Temp
-/Library
-/obj
-/.vs
-/.vscode
+/OrbitalityUnity/Temp
+/OrbitalityUnity/Library
+/OrbitalityUnity/obj
+/OrbitalityUnity/.vs
+/OrbitalityUnity/.vscode
 *.sln
 *.csproj
