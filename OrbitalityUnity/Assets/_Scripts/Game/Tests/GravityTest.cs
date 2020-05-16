@@ -3,6 +3,7 @@
 namespace Game.Tests
 {
     using Gravity;
+    using Utils;
 
     public class GravityTest : MonoBehaviour
     {
@@ -23,13 +24,7 @@ namespace Game.Tests
         private void FixedUpdate()
         {
             var gravityF = _gravitySystem.GetGravityForce(_testRocket);
-            var acceleration = GetAcceleration(_testRocket.mass, gravityF);
-            _testRocket.velocity += acceleration * Time.fixedDeltaTime;
-        }
-
-        private Vector3 GetAcceleration(float mass, Vector3 force)
-        {
-            return force / mass;
+            _testRocket.UpdateVelocity(gravityF, Time.fixedDeltaTime);
         }
     }
 }
