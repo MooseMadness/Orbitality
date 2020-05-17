@@ -21,6 +21,11 @@ namespace Game.Orbits
             _walkers.Add(orbitWalker.Id, orbitWalker);
         }
 
+        public void Remove(int id)
+        {
+            _walkers.Remove(id);
+        }
+
         public void Tick(float deltaTime)
         {
             foreach (var walker in _walkers.Values)
@@ -31,9 +36,14 @@ namespace Game.Orbits
         {
             walker.CurAngle += walker.AngularSpeed * deltaTime;
             var radians = walker.CurAngle * Mathf.Deg2Rad;
+
             Vector2 newPos = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
             newPos = newPos * walker.OrbitRadius + _center;
+
+            var prevPos = walker.Transform.localPosition; 
             walker.Transform.localPosition = newPos;
+            var moveDir = (walker.Transform.localPosition - prevPos).normalized;
+            walker.Transform.localRotation = Quaternion.LookRotation(moveDir);
         }
     }
 }

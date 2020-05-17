@@ -6,6 +6,7 @@ namespace Game.Contexts
     using Fire;
     using Gravity;
     using GameLoop;
+    using Damage;
 
     public class FireContext : MonoBehaviour
     {
@@ -18,12 +19,18 @@ namespace Game.Contexts
         public void Init(
             IEnumerable<PlanetContext> planets, 
             GravitySystem gravitySystem, 
-            SystemsUpdater systemsUpdater
+            SystemsUpdater systemsUpdater,
+            HealthsContainer healthsContainer
         )
         {
             _movementSystem = new RocketsMovementSystem(gravitySystem);
             systemsUpdater.AddPhysicsTicker(_movementSystem);
-            _rocketsFactory = new RocketsFactory(_rockets, _movementSystem, _rocketsParent);
+            _rocketsFactory = new RocketsFactory(
+                _rockets, 
+                _movementSystem, 
+                _rocketsParent,
+                healthsContainer
+            );
 
             foreach (var planet in planets)
             {

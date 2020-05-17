@@ -5,34 +5,36 @@ namespace Game.Gravity
 {
     public class GravitySystem
     {
-        private List<Rigidbody> _gravityProducers;
+        private SortedList<int, Rigidbody> _gravityProducers;
         private GravitySettings _gravitySettings;
 
         public GravitySystem(GravitySettings gravitySettings)
         {
             _gravitySettings = gravitySettings;
-            _gravityProducers = new List<Rigidbody>();
-        }
-
-        public void Add(Rigidbody gravityProducer)
-        {
-            _gravityProducers.Add(gravityProducer);
+            _gravityProducers = new SortedList<int, Rigidbody>();
         }
 
         public void Add(IEnumerable<Rigidbody> gravityProducers)
         {
-            _gravityProducers.AddRange(gravityProducers);
+            foreach (var gravityProducer in gravityProducers)
+                Add(gravityProducer);
         }
 
-        public void Remove(Rigidbody gravityProducer)
+        public void Add(Rigidbody gravityProducer)
         {
-            _gravityProducers.Remove(gravityProducer);
+            var id = gravityProducer.gameObject.GetInstanceID();
+            _gravityProducers.Add(id, gravityProducer);
+        }
+
+        public void Remove(int id)
+        {
+            _gravityProducers.Remove(id);
         }
 
         public Vector3 GetGravityForce(Rigidbody rigidbody)
         {
             var gravityForce = Vector3.zero;
-            foreach (var gravityProducer in _gravityProducers)
+            foreach (var gravityProducer in _gravityProducers.Values)
                 gravityForce += GetGravityForce(gravityProducer, rigidbody);
             return gravityForce;
         }

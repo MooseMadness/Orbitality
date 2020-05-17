@@ -2,21 +2,26 @@
 
 namespace Game.Fire
 {
+    using Damage;
+
     public class RocketsFactory
     {
-        [SerializeField] RocketsStorage _storage;
-        [SerializeField] RocketsMovementSystem _movementSystem;
-        [SerializeField] Transform _rocketsParent;
+        private RocketsStorage _storage;
+        private RocketsMovementSystem _movementSystem;
+        private Transform _rocketsParent;
+        private HealthsContainer _healthsContainer;
 
         public RocketsFactory(
             RocketsStorage rocketsStorage, 
             RocketsMovementSystem movementSystem, 
-            Transform rocketsParent
+            Transform rocketsParent,
+            HealthsContainer healthsContainer
         )
         {
             _storage = rocketsStorage;
             _movementSystem = movementSystem;
             _rocketsParent = rocketsParent;
+            _healthsContainer = healthsContainer;
         }
 
         public void CreateRocket(RocketType type, Vector3 startPos, Vector3 startDir)
@@ -28,7 +33,19 @@ namespace Game.Fire
                 Quaternion.LookRotation(startDir), 
                 _rocketsParent
             );
-            _movementSystem.AddRocket(rocketProvider.GetRocket());
+
+            var rocketDamage = rocketProvider.RocketDamage;
+            var rocketId = rocketDamage.gameObject.GetInstanceID();
+            _movementSystem.Add(rocketId, rocketProvider.GetRocket());
+            rocketDamage.OnDealDamage += RemoveRocket;
+            rocketDamage.SetHealthsContainer(_healthsContainer);
+        }
+
+        private void RemoveRocket(DamageDealer rocket)
+        {
+            var id = rocket.gameObject.GetInstanceID();
+            _movementSystem.Remove(id);
+            Object.Destroy(rocket.gameObject);
         }
     }
 }

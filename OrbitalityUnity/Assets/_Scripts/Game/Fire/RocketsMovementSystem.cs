@@ -10,22 +10,27 @@ namespace Game.Fire
     public class RocketsMovementSystem : ITickable
     {
         private GravitySystem _gravitySystem;
-        private List<Rocket> _rockets;
+        private SortedList<int, Rocket> _rockets;
 
         public RocketsMovementSystem(GravitySystem gravitySystem)
         {
             _gravitySystem = gravitySystem;
-            _rockets = new List<Rocket>();
+            _rockets = new SortedList<int, Rocket>();
         }
 
-        public void AddRocket(Rocket rocket)
+        public void Add(int rocketId, Rocket rocket)
         {
-            _rockets.Add(rocket);
+            _rockets.Add(rocketId, rocket);
+        }
+
+        public void Remove(int rocketId)
+        {
+            _rockets.Remove(rocketId);
         }
 
         public void Tick(float deltaTime)
         {
-            foreach (var rocket in _rockets)
+            foreach (var rocket in _rockets.Values)
             {
                 ApplyForces(rocket, deltaTime);
                 CorrectRotationToVelocity(rocket);
