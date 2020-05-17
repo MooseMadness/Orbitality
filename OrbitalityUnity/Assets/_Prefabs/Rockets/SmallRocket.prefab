@@ -49,8 +49,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RocketType: 0
   RocketDamage: {fileID: 4858225728469372987}
+  ViewLook: {fileID: 6693313900200292621}
   _rb: {fileID: 5030637434439229393}
-  _acceleration: 3
+  _acceleration: 50
+  _startVelocity: 70
 --- !u!54 &5030637434439229393
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -106,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5250401951441829028}
   - component: {fileID: 685115108745365616}
+  - component: {fileID: 6693313900200292621}
   m_Layer: 0
   m_Name: View
   m_TagString: Untagged
@@ -120,13 +123,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7592646647542416393}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 11.024664, y: 11.024664, z: 11.024664}
   m_Children: []
   m_Father: {fileID: 1622042301254746257}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &685115108745365616
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -175,3 +178,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6693313900200292621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7592646647542416393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce099823890fc634b929490521a7688f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransformToLook: {fileID: 0}

@@ -12,6 +12,7 @@ namespace Game.Contexts
     {
         [SerializeField] Transform _rocketsParent;
         [SerializeField] RocketsStorage _rockets;
+        [SerializeField] Transform _cameraTransform;
 
         private RocketsMovementSystem _movementSystem;
         private RocketsFactory _rocketsFactory;
@@ -29,7 +30,8 @@ namespace Game.Contexts
                 _rockets, 
                 _movementSystem, 
                 _rocketsParent,
-                healthsContainer
+                healthsContainer,
+                _cameraTransform
             );
 
             foreach (var planet in planets)

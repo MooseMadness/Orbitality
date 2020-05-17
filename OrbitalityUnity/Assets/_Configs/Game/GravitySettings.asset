@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c37f3ac9ed7d7f4fa3fe1572abe68fc, type: 3}
   m_Name: GravitySettings
   m_EditorClassIdentifier: 
-  GravitationalConstant: 1
+  GravitationalConstant: 30

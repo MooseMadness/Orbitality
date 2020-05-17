@@ -14,6 +14,6 @@ namespace Game
         public Range StartAngles;
         public RocketType[] AvailableRockets;
         public IntRange PlanetHealts;
-        public int[] AvailablePlanetsIds;
+        public int AvailablePlanetsCount;
     }
 }

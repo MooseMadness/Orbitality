@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf66ea6019f3a84b80b64b9765aeb79, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  OrbitStep: 2
-  FirstOrbitRadius: 3
+  OrbitStep: 4
+  FirstOrbitRadius: 4
   AngleSpeeds:
     From: 20
     To: 100
@@ -24,4 +24,4 @@ MonoBehaviour:
   PlanetHealts:
     From: 50
     To: 100
-  AvailablePlanetsIds: 0000000000000000000000000000000000000000000000000000000000000000
+  AvailablePlanetsCount: 5

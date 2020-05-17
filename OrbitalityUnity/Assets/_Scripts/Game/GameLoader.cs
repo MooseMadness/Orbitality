@@ -10,7 +10,7 @@ namespace Game
         private const int GAME_SCENE_INDEX = 1;
 
         public int MinPlanetsCount => 2;
-        public int MaxPlanetsCount => _gameSettings.AvailablePlanetsIds.Length;
+        public int MaxPlanetsCount => _gameSettings.AvailablePlanetsCount;
         public GameState GameState { private set; get; }
 
         private GameSettings _gameSettings;

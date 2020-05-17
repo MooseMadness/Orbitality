@@ -10,18 +10,21 @@ namespace Game.Fire
         private RocketsMovementSystem _movementSystem;
         private Transform _rocketsParent;
         private HealthsContainer _healthsContainer;
+        private Transform _cameraTransform;
 
         public RocketsFactory(
-            RocketsStorage rocketsStorage, 
-            RocketsMovementSystem movementSystem, 
+            RocketsStorage rocketsStorage,
+            RocketsMovementSystem movementSystem,
             Transform rocketsParent,
-            HealthsContainer healthsContainer
+            HealthsContainer healthsContainer,
+            Transform cameraTransform
         )
         {
             _storage = rocketsStorage;
             _movementSystem = movementSystem;
             _rocketsParent = rocketsParent;
             _healthsContainer = healthsContainer;
+            _cameraTransform = cameraTransform;
         }
 
         public void CreateRocket(RocketType type, Vector3 startPos, Vector3 startDir)
@@ -39,6 +42,7 @@ namespace Game.Fire
             _movementSystem.Add(rocketId, rocketProvider.GetRocket());
             rocketDamage.OnDealDamage += RemoveRocket;
             rocketDamage.SetHealthsContainer(_healthsContainer);
+            rocketProvider.ViewLook.TransformToLook = _cameraTransform;
         }
 
         private void RemoveRocket(DamageDealer rocket)

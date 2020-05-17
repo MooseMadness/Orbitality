@@ -143,9 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64bc6bb096ca8041b42800d6069aeac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orbitRadius: 10
-  _angularSpeed: 20
-  _startAngle: 180
+  OrbitRadius: 8
+  AngularSpeed: 40
+  StartAngle: 180
 --- !u!23 &293041498
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -365,9 +365,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64bc6bb096ca8041b42800d6069aeac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orbitRadius: 3
-  _angularSpeed: 50
-  _startAngle: 0
+  OrbitRadius: 5
+  AngularSpeed: 50
+  StartAngle: 10
 --- !u!23 &1422745230
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -458,9 +458,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64bc6bb096ca8041b42800d6069aeac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orbitRadius: 8
-  _angularSpeed: 80
-  _startAngle: 45
+  OrbitRadius: 3
+  AngularSpeed: 30
+  StartAngle: 90
 --- !u!23 &1642290572
 MeshRenderer:
   m_ObjectHideFlags: 0

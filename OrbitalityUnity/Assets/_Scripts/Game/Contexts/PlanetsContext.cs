@@ -3,17 +3,18 @@
 namespace Game.Contexts
 {
     using States;
+    using Planets;
 
     public class PlanetsContext : MonoBehaviour
     {
-        [SerializeField] PlanetContext _planetPrefab;
+        [SerializeField] PlanetContext[] _planetsPrefabs;
         [SerializeField] Transform _planetsRoot;
 
         public PlanetsStorage PlanetsStorage { private set; get; }
 
         public void Init(PlanetState[] planetStates)
         {
-            PlanetsStorage = new PlanetsStorage(_planetPrefab, _planetsRoot, planetStates);
+            PlanetsStorage = new PlanetsStorage(_planetsPrefabs, _planetsRoot, planetStates);
         }
     }
 }

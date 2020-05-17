@@ -4,7 +4,7 @@ using URandom = UnityEngine.Random;
 using System;
 using UnityEngine;
 
-namespace Game
+namespace Game.Planets
 {
     using Contexts;
     using States;
@@ -19,12 +19,15 @@ namespace Game
         private List<PlanetContext> _planets;
         private int _playerPlanetId;
 
-        public PlanetsStorage(PlanetContext planetPrefab, Transform planetsRoot, PlanetState[] planetsStates)
+        public PlanetsStorage(PlanetContext[] planetsPrefabs, Transform planetsRoot, PlanetState[] planetsStates)
         {
             _planets = new List<PlanetContext>(planetsStates.Length);
+            var prefabs = new List<PlanetContext>(planetsPrefabs);
             foreach(var planetState in planetsStates)
             {
-                var planetContext = UObject.Instantiate(planetPrefab, planetsRoot);
+                var rndPrefabIndex = URandom.Range(0, prefabs.Count);
+                var planetContext = UObject.Instantiate(prefabs[rndPrefabIndex], planetsRoot);
+                prefabs.RemoveAt(rndPrefabIndex);
 
                 var healthProvider = planetContext.HealthProvider;
                 healthProvider.StartHp = planetState.CurHealth;
