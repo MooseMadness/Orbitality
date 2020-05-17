@@ -1,4 +1,5 @@
 ﻿using UnityEngine.SceneManagement;
+using Utils;
 
 namespace Game
 {
@@ -39,6 +40,7 @@ namespace Game
                 planet.AngularSpeed = _gameSettings.AngleSpeeds.Collapse();
                 planet.CurAngle = _gameSettings.StartAngles.Collapse();
                 planet.OrbitRadius = orbitRadius;
+                planet.RocketType = _gameSettings.AvailableRockets.GetRandom();
 
                 GameState.Planets[i] = planet;
 

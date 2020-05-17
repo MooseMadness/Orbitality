@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rocketsPrefabs:
   - {fileID: 6735671136490082079, guid: eae8ffc453161b14997b13f5b568b7b4, type: 3}
-  - {fileID: 6735671136490082079, guid: 048c2b625f3c17c4db563f3d5d4dc6bf, type: 3}
-  - {fileID: 6735671136490082079, guid: 74061b05f2b33944badf00914fe5125e, type: 3}
+  - {fileID: 3524001120028225829, guid: 048c2b625f3c17c4db563f3d5d4dc6bf, type: 3}
+  - {fileID: 3524001120028225829, guid: 53e039d581f26194984c3a780ea13211, type: 3}

@@ -48,6 +48,8 @@ namespace Game.Planets
 
                 planetContext.HealthProvider.SetColor(enemyColor);
 
+                planetContext.CannonProvider.RocketType = planetState.RocketType;
+
                 _planets.Add(planetContext);
             }
 

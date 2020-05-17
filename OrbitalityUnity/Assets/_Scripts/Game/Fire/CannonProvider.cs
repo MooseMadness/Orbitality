@@ -4,7 +4,7 @@ namespace Game.Fire
 {
     public class CannonProvider : MonoBehaviour
     {
-        [SerializeField] RocketType _rocketType;
+        public RocketType RocketType;
         [SerializeField] float _reloadingTime;
 
         private Cannon _cannon;
@@ -22,7 +22,7 @@ namespace Game.Fire
                 _cannon = new Cannon(
                       transform,
                       _reloadingTime,
-                      _rocketType,
+                      RocketType,
                       _rocketsFactory
                   );
             }

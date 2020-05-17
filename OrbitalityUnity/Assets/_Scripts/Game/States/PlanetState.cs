@@ -3,6 +3,8 @@ using UnityEngine;
 
 namespace Game.States
 {
+    using Fire;
+
     [Serializable]
     public class PlanetState
     {
@@ -13,5 +15,6 @@ namespace Game.States
         public float AngularSpeed;
         public float CurAngle;
         public Vector3 Rotation;
+        public RocketType RocketType;
     }
 }
