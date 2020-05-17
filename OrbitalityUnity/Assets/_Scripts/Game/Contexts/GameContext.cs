@@ -16,10 +16,12 @@ namespace Game.Contexts
         [Tooltip("Count from 1")]
         [SerializeField] int _playerPlanetNumber;
         [SerializeField] Button _fireBtn;
-        [SerializeField] PlanetContext[] _planets;
+        [SerializeField] PlanetContext _planetPrefab;
+        [SerializeField] Transform _planetsRoot;
 
         private PlayerController _playerController;
         private HealthsContainer _healthsContainer;
+        private PlanetContext[] _planets;
 
         private void Start()
         {
@@ -29,6 +31,8 @@ namespace Game.Contexts
 
         private void InitSubContexts()
         {
+            CreatePlanets();
+
             _sunSystemContext.Init(_planets);
             _systemsUpdater.AddFrameTicker(_sunSystemContext.OrbitsSystem);
             _gravityContext.Init(_planets);
@@ -40,6 +44,29 @@ namespace Game.Contexts
                 _systemsUpdater,
                 _healthsContainer
             );
+        }
+
+        private void CreatePlanets()
+        {
+            var gameState = ProjectContext.Instance.GameLoader.GameState;
+            var planetsStates = gameState.Planets;
+
+            _planets = new PlanetContext[planetsStates.Length];
+            for(int i = 0; i < _planets.Length; i++)
+            {
+                _planets[i] = Instantiate(_planetPrefab, _planetsRoot);
+
+                var healthProvider = _planets[i].HealthProvider;
+                healthProvider.StartHp = planetsStates[i].CurHealth;
+                healthProvider.MaxHp = planetsStates[i].MaxHealth;
+
+                var orbitWalkerProvider = _planets[i].OrbitWalkerProvider;
+                orbitWalkerProvider.OrbitRadius = planetsStates[i].OrbitRadius;
+                orbitWalkerProvider.StartAngle = planetsStates[i].CurAngle;
+                orbitWalkerProvider.AngularSpeed = planetsStates[i].AngularSpeed;
+
+                _planets[i].transform.localRotation = Quaternion.Euler(planetsStates[i].Rotation);
+            }
         }
 
         private void InitPlayer()

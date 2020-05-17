@@ -4,11 +4,12 @@ namespace Game.Damage
 {
     public class HealthProvider : MonoBehaviour
     {
-        [SerializeField] int _hp;
+        public int StartHp;
+        public int MaxHp;
 
         public Health GetHealth()
         {
-            return new Health(gameObject.GetInstanceID(), _hp);
+            return new Health(gameObject.GetInstanceID(), StartHp, MaxHp);
         }
     }
 }

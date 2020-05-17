@@ -1,4 +1,5 @@
 ﻿using Windows;
+using Game;
 
 public class ProjectContext
 {
@@ -8,8 +9,15 @@ public class ProjectContext
 
     public readonly WindowsController Windows;
 
+    public GameLoader GameLoader { private set; get; }
+
     private ProjectContext()
     {
         Windows = new WindowsController();
+    }
+
+    public void CreateGameLoader(GameSettings gameSettings)
+    {
+        GameLoader = new GameLoader(gameSettings);
     }
 }

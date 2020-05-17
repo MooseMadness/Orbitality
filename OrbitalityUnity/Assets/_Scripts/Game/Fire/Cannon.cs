@@ -27,7 +27,7 @@ namespace Game.Fire
             _rocketsFactory = rocketsFactory;
         }
 
-        /// <returns>Was attempt of fire successfull</returns>
+        /// <returns>Is attempt of fire successfull</returns>
         public bool TryFire()
         {
             if (!IsReloaded)

@@ -10,10 +10,11 @@
         public event OnDamageHandler OnDamage;
         public event OnKilledHandler OnKilled;
 
-        public Health(int id, int healthAmount)
+        public Health(int id, int healthAmount, int maxHealth)
         {
             Id = id;
-            _curHp = _maxHp = healthAmount;
+            _curHp = healthAmount;
+            _maxHp = maxHealth;
         }
 
         public void TakeDamage(int amount)
