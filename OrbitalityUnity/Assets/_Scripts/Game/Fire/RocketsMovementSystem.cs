@@ -6,6 +6,7 @@ namespace Game.Fire
     using Gravity;
     using Utils;
     using GameLoop;
+    using States;
 
     public class RocketsMovementSystem : ITickable
     {
@@ -16,6 +17,25 @@ namespace Game.Fire
         {
             _gravitySystem = gravitySystem;
             _rockets = new SortedList<int, Rocket>();
+        }
+
+        public RocketState[] GetRocketsStates()
+        {
+            var states = new RocketState[_rockets.Values.Count];
+            for(int i = 0; i < states.Length; i++)
+            {
+                var rocket = _rockets.Values[i];
+                var state = new RocketState();
+
+                state.CurVelocity = rocket.Rb.velocity;
+                state.RocketType = rocket.RocketType;
+                state.Rotation = rocket.Rb.transform.rotation.eulerAngles;
+                state.WorldCoords = rocket.Rb.transform.position;
+
+                states[i] = state;
+            }
+
+            return states;
         }
 
         public void Add(int rocketId, Rocket rocket)

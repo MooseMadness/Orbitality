@@ -3,6 +3,7 @@
 namespace Game.Fire
 {
     using Damage;
+    using States;
 
     public class RocketsFactory
     {
@@ -27,7 +28,20 @@ namespace Game.Fire
             _cameraTransform = cameraTransform;
         }
 
-        public void CreateRocket(RocketType type, Vector3 startPos, Vector3 startDir)
+        public void CreateRockets(RocketState[] rocketsStates)
+        {
+            if (rocketsStates == null)
+                return;
+
+            foreach(var state in rocketsStates)
+            {
+                var rocket = CreateRocket(state.RocketType, state.WorldCoords, Vector3.one);
+                rocket.Rb.transform.rotation = Quaternion.Euler(state.Rotation);
+                rocket.Rb.velocity = state.CurVelocity;
+            }
+        }
+
+        public Rocket CreateRocket(RocketType type, Vector3 startPos, Vector3 startDir)
         {
             var rocketPrefab = _storage.GetRocketPrefab(type);
             var rocketProvider = Object.Instantiate(
@@ -39,10 +53,13 @@ namespace Game.Fire
 
             var rocketDamage = rocketProvider.RocketDamage;
             var rocketId = rocketDamage.gameObject.GetInstanceID();
-            _movementSystem.Add(rocketId, rocketProvider.GetRocket());
+            var rocket = rocketProvider.GetRocket();
+            _movementSystem.Add(rocketId, rocket);
             rocketDamage.OnDealDamage += RemoveRocket;
             rocketDamage.SetHealthsContainer(_healthsContainer);
             rocketProvider.ViewLook.TransformToLook = _cameraTransform;
+
+            return rocket;
         }
 
         private void RemoveRocket(DamageDealer rocket)

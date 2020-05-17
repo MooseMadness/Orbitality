@@ -4,8 +4,9 @@
     {
         public readonly int Id;
 
-        private readonly int _maxHp;
-        private int _curHp;
+        public readonly int MaxHp;
+
+        public int CurHp { private set; get; }
 
         public event OnDamageHandler OnDamage;
         public event OnKilledHandler OnKilled;
@@ -13,19 +14,19 @@
         public Health(int id, int healthAmount, int maxHealth)
         {
             Id = id;
-            _curHp = healthAmount;
-            _maxHp = maxHealth;
+            CurHp = healthAmount;
+            MaxHp = maxHealth;
         }
 
         public void TakeDamage(int amount)
         {
-            _curHp -= amount;
-            if (_curHp < 0)
-                _curHp = 0;
+            CurHp -= amount;
+            if (CurHp < 0)
+                CurHp = 0;
 
-            OnDamage?.Invoke(_curHp, _maxHp);
+            OnDamage?.Invoke(CurHp, MaxHp);
 
-            if(_curHp == 0)
+            if(CurHp == 0)
                 OnKilled?.Invoke(Id);
         }
 

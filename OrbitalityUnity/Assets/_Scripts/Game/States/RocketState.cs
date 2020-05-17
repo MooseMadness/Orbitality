@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
+using Utils;
 
 namespace Game.States
 {
@@ -9,8 +9,8 @@ namespace Game.States
     public class RocketState
     {
         public RocketType RocketType;
-        public Vector3 CurVelocity;
-        public Vector3 WorldCoords;
-        public Vector3 Rotation;
+        public Vector3Wraper CurVelocity;
+        public Vector3Wraper WorldCoords;
+        public Vector3Wraper Rotation;
     }
 }

@@ -28,7 +28,10 @@ namespace Windows
 
         private void Exit()
         {
-            ProjectContext.Instance.GameLoader.ToMainMenu();
+            var projectContext = ProjectContext.Instance;
+            projectContext.GameLoader.ToMainMenu();
+            projectContext.GameSave.CreateSave();
+            projectContext.GameSave.ClearGameEntities();
             Time.timeScale = 1;
         }
 

@@ -30,6 +30,8 @@ namespace Game.Planets
         {
             _planets = new List<PlanetContext>(planetsStates.Length);
             var prefabs = new List<PlanetContext>(planetsPrefabs);
+            var needSelectPlayerPlanet = true;
+
             foreach(var planetState in planetsStates)
             {
                 var rndPrefabIndex = URandom.Range(0, prefabs.Count);
@@ -46,18 +48,61 @@ namespace Game.Planets
                 orbitWalkerProvider.AngularSpeed = planetState.AngularSpeed;
 
                 planetContext.transform.localRotation = Quaternion.Euler(planetState.Rotation);
-
-                planetContext.HealthProvider.SetColor(enemyColor);
-
+                
                 planetContext.CannonProvider.RocketType = planetState.RocketType;
+
+                if(planetState.IsPlayer)
+                {
+                    needSelectPlayerPlanet = false;
+                    _playerPlanetId = planetContext.Id;
+                    planetContext.HealthProvider.SetColor(playerColor);
+                }
+                else
+                {
+                    planetContext.HealthProvider.SetColor(enemyColor);
+                }
 
                 _planets.Add(planetContext);
             }
 
+            if (needSelectPlayerPlanet)
+                SelectPlayerPlanet(playerColor);
+        }
+
+        private void SelectPlayerPlanet(Color playerColor)
+        {
             var rndIndex = URandom.Range(0, _planets.Count);
             var playerPlanet = _planets[rndIndex];
             _playerPlanetId = playerPlanet.Id;
             playerPlanet.HealthProvider.SetColor(playerColor);
+        }
+
+        public PlanetState[] GetPlanetsStates()
+        {
+            var states = new PlanetState[_planets.Count];
+            for(int i = 0; i < states.Length; i++)
+            {
+                var state = new PlanetState();
+
+                var orbitWalker = _planets[i].OrbitWalkerProvider.GetOrbitWalker();
+                state.AngularSpeed = orbitWalker.AngularSpeed;
+                state.CurAngle = orbitWalker.CurAngle;
+                state.OrbitRadius = orbitWalker.OrbitRadius;
+                state.Rotation = orbitWalker.Transform.localRotation.eulerAngles;
+
+                state.IsPlayer = _planets[i].Id == _playerPlanetId;
+
+                var health = _planets[i].HealthProvider.GetHealth();
+                state.MaxHealth = health.MaxHp;
+                state.CurHealth = health.CurHp;
+
+                var cannon = _planets[i].CannonProvider.GetCannon();
+                state.RocketType = cannon.RocketType;
+
+                states[i] = state;
+            }
+
+            return states;
         }
 
         public PlanetContext GetPlayerPlanet()

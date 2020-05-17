@@ -7,6 +7,7 @@ namespace Game.Contexts
     using Gravity;
     using GameLoop;
     using Damage;
+    using States;
 
     public class FireContext : MonoBehaviour
     {
@@ -14,25 +15,28 @@ namespace Game.Contexts
         [SerializeField] RocketsStorage _rockets;
         [SerializeField] Transform _cameraTransform;
 
-        private RocketsMovementSystem _movementSystem;
+        public RocketsMovementSystem MovementSystem { private set; get; }
+
         private RocketsFactory _rocketsFactory;
 
         public void Init(
             IEnumerable<PlanetContext> planets, 
             GravitySystem gravitySystem, 
             SystemsUpdater systemsUpdater,
-            HealthsContainer healthsContainer
+            HealthsContainer healthsContainer,
+            RocketState[] rocketsStates
         )
         {
-            _movementSystem = new RocketsMovementSystem(gravitySystem);
-            systemsUpdater.AddPhysicsTicker(_movementSystem);
+            MovementSystem = new RocketsMovementSystem(gravitySystem);
+            systemsUpdater.AddPhysicsTicker(MovementSystem);
             _rocketsFactory = new RocketsFactory(
                 _rockets, 
-                _movementSystem, 
+                MovementSystem, 
                 _rocketsParent,
                 healthsContainer,
                 _cameraTransform
             );
+            _rocketsFactory.CreateRockets(rocketsStates);
 
             foreach (var planet in planets)
             {

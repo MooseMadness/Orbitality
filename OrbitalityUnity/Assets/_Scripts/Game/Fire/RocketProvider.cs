@@ -18,7 +18,8 @@ namespace Game.Fire
         {
             var rocket = new Rocket {
                 Rb = _rb,
-                Acceleration = _acceleration
+                Acceleration = _acceleration,
+                RocketType = RocketType
             };
 
             rocket.Rb.velocity = transform.forward * _startVelocity;

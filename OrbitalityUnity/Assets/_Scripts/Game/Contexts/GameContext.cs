@@ -33,10 +33,14 @@ namespace Game.Contexts
                 _planetsContext.PlanetsStorage.Planets,
                 _gravityContext.GravitySystem,
                 _systemsUpdater,
-                _healthsContext.HealthsContainer
+                _healthsContext.HealthsContainer,
+                gameState.Rockets
             );
 
             _controllsContext.Init(_planetsContext.PlanetsStorage, _systemsUpdater);
+
+            var gameSave = ProjectContext.Instance.GameSave;
+            gameSave.SetGameEntities(_planetsContext.PlanetsStorage, _fireContext.MovementSystem);
         }
     }
 }

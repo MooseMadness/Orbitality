@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 namespace Windows
 {
@@ -21,9 +20,16 @@ namespace Windows
             _exitBtn.onClick.AddListener(Exit);
         }
 
+        public override void Show()
+        {
+            var gameSave = ProjectContext.Instance.GameSave;
+            _continueBtn.interactable = gameSave.IsSaveExist();
+            base.Show();
+        }
+
         private void Continue()
         {
-
+            ProjectContext.Instance.GameLoader.Continue();
         }
 
         private void NewGame()

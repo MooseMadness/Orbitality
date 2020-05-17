@@ -4,6 +4,7 @@ using Utils;
 namespace Game
 {
     using States;
+    using Saves;
 
     public class GameLoader
     {
@@ -14,16 +15,27 @@ namespace Game
         public int MaxPlanetsCount => _gameSettings.AvailablePlanetsCount;
         public GameState GameState { private set; get; }
 
-        private GameSettings _gameSettings;
+        private readonly GameSettings _gameSettings;
+        private readonly GameSave _gameSave;
 
-        public GameLoader(GameSettings gameSettings)
+        public GameLoader(GameSettings gameSettings, GameSave gameSave)
         {
             _gameSettings = gameSettings;
+            _gameSave = gameSave;
         }
 
         public void NewGame(int planetsCount)
         {
             GenerateNewGameState(planetsCount);
+            if(_gameSave.IsSaveExist())
+                _gameSave.Clear();
+
+            SceneManager.LoadScene(GAME_SCENE_INDEX, LoadSceneMode.Single);
+        }
+
+        public void Continue()
+        {
+            GameState = _gameSave.LoadSave();
             SceneManager.LoadScene(GAME_SCENE_INDEX, LoadSceneMode.Single);
         }
 

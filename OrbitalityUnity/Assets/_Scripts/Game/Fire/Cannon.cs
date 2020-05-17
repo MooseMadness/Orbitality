@@ -6,9 +6,10 @@ namespace Game.Fire
 
     public class Cannon : ITickable
     {
+        public readonly RocketType RocketType;
+
         private Transform _transform;
         private float _reloadingTime;
-        private RocketType _rocketType;
         private float _counter;
         private RocketsFactory _rocketsFactory;
 
@@ -23,7 +24,7 @@ namespace Game.Fire
         {
             _transform = transform;
             _reloadingTime = reloadingTime;
-            _rocketType = rocketType;
+            RocketType = rocketType;
             _rocketsFactory = rocketsFactory;
         }
 
@@ -43,7 +44,7 @@ namespace Game.Fire
 
             try
             {
-                _rocketsFactory.CreateRocket(_rocketType, _transform.position, _transform.forward);
+                _rocketsFactory.CreateRocket(RocketType, _transform.position, _transform.forward);
             }
             catch(System.Exception ex)
             {

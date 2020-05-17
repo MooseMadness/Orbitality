@@ -8,6 +8,8 @@ namespace Game.Damage
         public int MaxHp;
         [SerializeField] HealthView _healthView;
 
+        private Health _health;
+
         public void SetColor(Color color)
         {
             _healthView.SetColor(color);
@@ -15,10 +17,14 @@ namespace Game.Damage
 
         public Health GetHealth()
         {
-            var health = new Health(gameObject.GetInstanceID(), StartHp, MaxHp);
-            _healthView.UpdateHealth(StartHp, MaxHp);
-            health.OnDamage += _healthView.UpdateHealth;
-            return health;
+            if (_health == null)
+            {
+                _health = new Health(gameObject.GetInstanceID(), StartHp, MaxHp);
+                _healthView.UpdateHealth(StartHp, MaxHp);
+                _health.OnDamage += _healthView.UpdateHealth;
+            }
+
+            return _health;
         }
     }
 }

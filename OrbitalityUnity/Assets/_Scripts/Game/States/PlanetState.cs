@@ -1,5 +1,5 @@
 ﻿using System;
-using UnityEngine;
+using Utils;
 
 namespace Game.States
 {
@@ -8,13 +8,13 @@ namespace Game.States
     [Serializable]
     public class PlanetState
     {
-        public int PlanetTypeId;
         public int MaxHealth;
         public int CurHealth;
         public float OrbitRadius;
         public float AngularSpeed;
         public float CurAngle;
-        public Vector3 Rotation;
+        public Vector3Wraper Rotation;
         public RocketType RocketType;
+        public bool IsPlayer;
     }
 }

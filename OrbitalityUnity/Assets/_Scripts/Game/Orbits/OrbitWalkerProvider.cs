@@ -8,15 +8,22 @@ namespace Game.Orbits
         public float AngularSpeed;
         public float StartAngle;
 
+        private OrbitWalker _orbitWalker;
+
         public OrbitWalker GetOrbitWalker()
         {
-            return new OrbitWalker {
-                Id = gameObject.GetInstanceID(),
-                Transform = transform,
-                CurAngle = StartAngle,
-                OrbitRadius = OrbitRadius,
-                AngularSpeed = AngularSpeed,
-            };
+            if (_orbitWalker == null)
+            {
+                _orbitWalker = new OrbitWalker {
+                    Id = gameObject.GetInstanceID(),
+                    Transform = transform,
+                    CurAngle = StartAngle,
+                    OrbitRadius = OrbitRadius,
+                    AngularSpeed = AngularSpeed,
+                };
+            }
+
+            return _orbitWalker;
         }
     }
 }
