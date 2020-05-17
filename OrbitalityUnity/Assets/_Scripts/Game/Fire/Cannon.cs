@@ -27,13 +27,28 @@ namespace Game.Fire
             _rocketsFactory = rocketsFactory;
         }
 
+        /// <summary>
+        /// check is cannon transform still alive 
+        /// </summary>
+        public bool IsValid()
+        {
+            return _transform;
+        }
+
         /// <returns>Is attempt of fire successfull</returns>
         public bool TryFire()
         {
             if (!IsReloaded)
                 return false;
 
-            _rocketsFactory.CreateRocket(_rocketType, _transform.position, _transform.forward);
+            try
+            {
+                _rocketsFactory.CreateRocket(_rocketType, _transform.position, _transform.forward);
+            }
+            catch(System.Exception ex)
+            {
+                throw ex;
+            }
             _counter = _reloadingTime;
             return true;
         }

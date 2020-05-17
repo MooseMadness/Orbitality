@@ -2,7 +2,6 @@
 
 namespace Game.Controlls
 {
-    using Contexts;
     using Fire;
 
     public class PlayerController
@@ -10,10 +9,10 @@ namespace Game.Controlls
         private Cannon _cannon;
         private Button _fireBtn;
 
-        public PlayerController(PlanetContext planet, Button fireBtn)
+        public PlayerController(Cannon cannon, Button fireBtn)
         {
             _fireBtn = fireBtn;
-            _cannon = planet.CannonProvider.GetCannon();
+            _cannon = cannon;
             fireBtn.onClick.AddListener(Fire);
         }
 

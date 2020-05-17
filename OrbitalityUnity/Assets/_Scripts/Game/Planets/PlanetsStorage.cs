@@ -13,6 +13,7 @@ namespace Game.Planets
     {
         public Action OnPlayerKilled;
         public Action OnAllEnemiesKilled;
+        public OnEnemyKilledHandler OnEnemyKilled;
 
         public IEnumerable<PlanetContext> Planets => _planets;
 
@@ -69,20 +70,37 @@ namespace Game.Planets
             return null; 
         }
 
+        public IEnumerable<PlanetContext> GetAIContexts()
+        {
+            foreach(var planet in _planets)
+            {
+                if (planet.Id != _playerPlanetId)
+                    yield return planet;
+            }
+        }
+
         public void RemovePlanet(int id)
         {
-            for(int i = 0; i < _planets.Count; i++)
+            if (id == _playerPlanetId)
+            {
+                OnPlayerKilled?.Invoke();
+            }
+            else
+            {
+                OnEnemyKilled?.Invoke(id);
+            }
+
+            for (int i = 0; i < _planets.Count; i++)
             {
                 if (id == _planets[i].Id)
                 {
                     UObject.Destroy(_planets[i].gameObject);
+                    _planets.RemoveAt(i);
                     break;
                 }
             }
 
-            if (id == _playerPlanetId)
-                OnPlayerKilled?.Invoke();
-            else if (_planets.Count == 1 && _planets[0].Id == _playerPlanetId)
+            if (_planets.Count == 1 && _planets[0].Id == _playerPlanetId)
                 OnAllEnemiesKilled?.Invoke();
         }
     }

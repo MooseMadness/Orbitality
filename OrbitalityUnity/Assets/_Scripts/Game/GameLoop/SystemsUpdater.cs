@@ -24,6 +24,16 @@ namespace Game.GameLoop
             _physicsTickers.Add(ticker);
         }
 
+        public void RemoveFrameTicker(ITickable ticker)
+        {
+            _frameTickers.Remove(ticker);
+        }
+
+        public void RemovePhysicsTicker(ITickable ticker)
+        {
+            _physicsTickers.Remove(ticker);
+        }
+
         private void Update()
         {
             if (_frameTickers == null)

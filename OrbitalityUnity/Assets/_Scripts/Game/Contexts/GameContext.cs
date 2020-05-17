@@ -10,7 +10,7 @@ namespace Game.Contexts
         [SerializeField] GravityContext _gravityContext;
         [SerializeField] FireContext _fireContext;
         [SerializeField] PlanetsContext _planetsContext;
-        [SerializeField] PlayerContext _playerContext;
+        [SerializeField] ControllsContext _controllsContext;
         [SerializeField] HealthsContext _healthsContext;
         [SerializeField] SystemsUpdater _systemsUpdater;
 
@@ -36,7 +36,7 @@ namespace Game.Contexts
                 _healthsContext.HealthsContainer
             );
 
-            _playerContext.Init(_planetsContext.PlanetsStorage);
+            _controllsContext.Init(_planetsContext.PlanetsStorage, _systemsUpdater);
         }
     }
 }

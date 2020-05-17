@@ -705,7 +705,7 @@ MonoBehaviour:
   _gravityContext: {fileID: 1160403575}
   _fireContext: {fileID: 153130228}
   _planetsContext: {fileID: 470175013}
-  _playerContext: {fileID: 663485027}
+  _controllsContext: {fileID: 663485027}
   _healthsContext: {fileID: 162297938}
   _systemsUpdater: {fileID: 603328665}
 --- !u!4 &621933089
@@ -739,7 +739,7 @@ GameObject:
   - component: {fileID: 663485028}
   - component: {fileID: 663485027}
   m_Layer: 0
-  m_Name: PlayerContext
+  m_Name: ControllsContext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -757,6 +757,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e79030e2db431b74e90b9324e0ab620e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _aiFireInterval:
+    From: 4
+    To: 8
   _fireBtn: {fileID: 443761340}
 --- !u!4 &663485028
 Transform:

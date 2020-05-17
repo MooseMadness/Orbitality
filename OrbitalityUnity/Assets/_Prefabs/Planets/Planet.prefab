@@ -250,8 +250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820c3f4f0f79abd4abdb73de66951271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rocketType: 0
-  _reloadingTime: 2
+  RocketType: 0
+  _reloadingTime: 1
 --- !u!1 &6475537839364067297
 GameObject:
   m_ObjectHideFlags: 0
