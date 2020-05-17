@@ -15,13 +15,9 @@ namespace Game.Contexts
         public void Init(IEnumerable<PlanetContext> planets)
         {
             GravitySystem = new GravitySystem(_gravitySettings);
-            int index = 0;
+
             foreach (var planet in planets)
-            {
-                if(index != 1)
-                    GravitySystem.Add(planet.Rb);
-                index++;
-            }
+                GravitySystem.Add(planet.Rb);
             GravitySystem.Add(_sun);
         }
     }
