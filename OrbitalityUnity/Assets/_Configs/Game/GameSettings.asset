@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf66ea6019f3a84b80b64b9765aeb79, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  OrbitStep: 4
-  FirstOrbitRadius: 4
+  OrbitStep: 3.8
+  FirstOrbitRadius: 6
   AngleSpeeds:
     From: 20
     To: 100

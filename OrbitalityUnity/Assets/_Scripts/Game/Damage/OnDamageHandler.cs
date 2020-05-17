@@ -1,4 +1,4 @@
 ﻿namespace Game.Damage
 {
-    public delegate void OnDamageHandler(int curHealth);
+    public delegate void OnDamageHandler(int curHealth, int maxHealth);
 }

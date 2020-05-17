@@ -46,7 +46,7 @@ namespace Game.Gravity
                 return Vector3.zero;
 
             var forceDir = forceV.normalized;
-            var forceMagnitude = gravityProducer.mass * rigidBody.mass / forceV.sqrMagnitude;
+            var forceMagnitude = gravityProducer.mass * rigidBody.mass / forceV.magnitude;
             return forceDir * forceMagnitude * _gravitySettings.GravitationalConstant;
         }
     }

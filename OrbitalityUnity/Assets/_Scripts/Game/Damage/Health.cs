@@ -23,7 +23,7 @@
             if (_curHp < 0)
                 _curHp = 0;
 
-            OnDamage?.Invoke(_curHp);
+            OnDamage?.Invoke(_curHp, _maxHp);
 
             if(_curHp == 0)
                 OnKilled?.Invoke(Id);

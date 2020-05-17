@@ -19,7 +19,13 @@ namespace Game.Planets
         private List<PlanetContext> _planets;
         private int _playerPlanetId;
 
-        public PlanetsStorage(PlanetContext[] planetsPrefabs, Transform planetsRoot, PlanetState[] planetsStates)
+        public PlanetsStorage(
+            PlanetContext[] planetsPrefabs, 
+            Transform planetsRoot, 
+            PlanetState[] planetsStates,
+            Color playerColor,
+            Color enemyColor
+        )
         {
             _planets = new List<PlanetContext>(planetsStates.Length);
             var prefabs = new List<PlanetContext>(planetsPrefabs);
@@ -40,11 +46,15 @@ namespace Game.Planets
 
                 planetContext.transform.localRotation = Quaternion.Euler(planetState.Rotation);
 
+                planetContext.HealthProvider.SetColor(enemyColor);
+
                 _planets.Add(planetContext);
             }
 
             var rndIndex = URandom.Range(0, _planets.Count);
-            _playerPlanetId = _planets[rndIndex].Id;
+            var playerPlanet = _planets[rndIndex];
+            _playerPlanetId = playerPlanet.Id;
+            playerPlanet.HealthProvider.SetColor(playerColor);
         }
 
         public PlanetContext GetPlayerPlanet()
