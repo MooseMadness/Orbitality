@@ -14,6 +14,8 @@ namespace Game.Contexts
         [SerializeField] HealthsContext _healthsContext;
         [SerializeField] SystemsUpdater _systemsUpdater;
 
+        private GameResultController _resultController;
+
         private void Start()
         {
             var gameState = ProjectContext.Instance.GameLoader.GameState;
@@ -41,6 +43,10 @@ namespace Game.Contexts
 
             var gameSave = ProjectContext.Instance.GameSave;
             gameSave.SetGameEntities(_planetsContext.PlanetsStorage, _fireContext.MovementSystem);
+
+            _resultController = new GameResultController();
+            _planetsContext.PlanetsStorage.OnAllEnemiesKilled += _resultController.Win;
+            _planetsContext.PlanetsStorage.OnPlayerKilled += _resultController.Loose;
         }
     }
 }

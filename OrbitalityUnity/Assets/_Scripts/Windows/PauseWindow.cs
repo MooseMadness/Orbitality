@@ -29,7 +29,7 @@ namespace Windows
         private void Exit()
         {
             var projectContext = ProjectContext.Instance;
-            projectContext.GameLoader.ToMainMenu();
+            projectContext.GameLoader.ToMainMenu(false);
             projectContext.GameSave.CreateSave();
             projectContext.GameSave.ClearGameEntities();
             Time.timeScale = 1;

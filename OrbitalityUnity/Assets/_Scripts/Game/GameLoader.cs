@@ -60,8 +60,12 @@ namespace Game
             }
         }
 
-        public void ToMainMenu()
+        public void ToMainMenu(bool clearSave)
         {
+            _gameSave.ClearGameEntities();
+            if (clearSave && _gameSave.IsSaveExist())
+                _gameSave.Clear();
+
             SceneManager.LoadScene(MAIN_MENU_SCENE_INDEX, LoadSceneMode.Single);
         }
     }
