@@ -46,6 +46,7 @@ namespace Game.Gravity
                 return Vector3.zero;
 
             var forceDir = forceV.normalized;
+            //physicaly wrong formula of gravity. with this formula gameplay feels better
             var forceMagnitude = gravityProducer.mass * rigidBody.mass / forceV.magnitude;
             return forceDir * forceMagnitude * _gravitySettings.GravitationalConstant;
         }
