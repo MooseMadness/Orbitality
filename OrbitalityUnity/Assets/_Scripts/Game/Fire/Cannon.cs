@@ -8,6 +8,8 @@ namespace Game.Fire
     {
         public readonly RocketType RocketType;
 
+        public event OnTimerChangedHandler OnTimerChanged;
+
         private Transform _transform;
         private float _reloadingTime;
         private float _counter;
@@ -42,22 +44,19 @@ namespace Game.Fire
             if (!IsReloaded)
                 return false;
 
-            try
-            {
-                _rocketsFactory.CreateRocket(RocketType, _transform.position, _transform.forward);
-            }
-            catch(System.Exception ex)
-            {
-                throw ex;
-            }
+            _rocketsFactory.CreateRocket(RocketType, _transform.position, _transform.forward);
             _counter = _reloadingTime;
+            OnTimerChanged?.Invoke(_counter);
             return true;
         }
 
         public void Tick(float deltaTime)
         {
-            if(_counter > 0)
+            if (_counter > 0)
+            {
                 _counter -= deltaTime;
+                OnTimerChanged?.Invoke(_counter);
+            }
         }
     }
 }

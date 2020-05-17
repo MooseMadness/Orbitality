@@ -7,11 +7,13 @@ namespace Game.Contexts
     using Controlls;
     using Planets;
     using GameLoop;
+    using Fire;
 
     public class ControllsContext : MonoBehaviour
     {
         [SerializeField] Range _aiFireInterval;
         [SerializeField] Button _fireBtn;
+        [SerializeField] CountdownView _countdownView;
 
         public PlayerController PlayerController { private set; get; }
         
@@ -24,6 +26,7 @@ namespace Game.Contexts
         private void CreatePlayer(PlanetsStorage planetsStorage)
         {
             var playerPlanet = planetsStorage.GetPlayerPlanet();
+            playerPlanet.CannonProvider.GetCannon().OnTimerChanged += _countdownView.UpdateTime;
             PlayerController = new PlayerController(playerPlanet.CannonProvider.GetCannon(), _fireBtn);
             planetsStorage.OnPlayerKilled += PlayerController.Clear;
         }

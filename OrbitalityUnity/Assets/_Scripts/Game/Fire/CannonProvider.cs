@@ -20,11 +20,11 @@ namespace Game.Fire
             if (_cannon == null)
             {
                 _cannon = new Cannon(
-                      transform,
-                      _reloadingTime,
-                      RocketType,
-                      _rocketsFactory
-                  );
+                    transform,
+                    _reloadingTime,
+                    RocketType,
+                    _rocketsFactory
+                );
             }
 
             return _cannon;
