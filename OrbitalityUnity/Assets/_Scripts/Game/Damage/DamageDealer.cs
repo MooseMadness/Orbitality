@@ -31,12 +31,10 @@ namespace Game.Damage
             var healthId = collidingGO.GetInstanceID();
             var health = _healthsContainer.GetHealth(healthId);
             if (health != null)
-            {
                 health.TakeDamage(_damageAmount);
 
-                var myId = gameObject.GetInstanceID();
-                OnDealDamage?.Invoke(this);
-            }
+            var myId = gameObject.GetInstanceID();
+            OnDealDamage?.Invoke(this);
         }
 
         private void OnDestroy()
